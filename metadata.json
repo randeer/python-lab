@@ -1,0 +1,6 @@
+{
+  "name": "Python Learning Lab",
+  "description": "An interactive, mobile-friendly Python learning lab with bite-sized lessons, a simulated code execution console, a custom keypad, and a server-side AI tutor.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

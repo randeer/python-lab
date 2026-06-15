@@ -1,0 +1,153 @@
+import { Module, Badge } from "./types";
+
+export const PYTHON_MODULES: Module[] = [
+  {
+    id: "for_loops_lab",
+    title: "1. For Loops Explorer",
+    description: "Learn how to repeat actions for every item in lists or numerical ranges.",
+    iconName: "Terminal",
+    lessons: [
+      {
+        id: "for_list_loop",
+        moduleId: "for_loops_lab",
+        title: "The Mighty For Loop",
+        shortSummary: "How to iterate over list items step-by-step.",
+        conceptText: "A `for` loop is Pythons most popular loop tool. It lets you assign each item of a list to a temporary variable, one-by-one, and run a block of indented code on them.\n\n### What is Happening Behind the Scenes?\n1. **The Handshake**: In the background, Python calls `iter()` on your list, turning it into an active cursor stream.\n2. **The Pointer**: A pointer reads the first item and stores it inside your loop variable (e.g., `item`).\n3. **Indentation execution**: Python runs the indented lines below.\n4. **Next Step**: Pointer shifts to the next index. If it hits the end, Python grabs a `StopIteration` error internally and exits cleanly!",
+        instructions: "Complete the loop to print each color in our list of strings inside your print call! Use the variable name `c`.",
+        initialCode: "colors = [\"red\", \"green\", \"blue\"]\n\nfor c in colors:\n    # Use print() to print the active variable 'c'\n    ",
+        solutionCode: "colors = [\"red\", \"green\", \"blue\"]\nfor c in colors:\n    print(c)",
+        checkType: "exact",
+        expectedOutput: "red\ngreen\nblue",
+        hint: "Inside the indented space, write exactly: print(c)",
+        difficulty: "Beginner",
+        xpReward: 30,
+      },
+      {
+        id: "range_loops",
+        moduleId: "for_loops_lab",
+        title: "Counting with range()",
+        shortSummary: "Generate sequences of numbers instantly.",
+        conceptText: "What if you want to loop exactly 4 times, but don't have a list? Python gives us the `range(stop)` function! \n\n`range(4)` generates numbers starting from `0` up to (but not including!) `4`: `[0, 1, 2, 3]`.\n\n### Behind the Scenes:\n`range()` does NOT create the entire list in your computers RAM all at once. Instead, it generates each number on-the-fly *only* when the loop demands it, making it incredibly fast and memory-efficient! This is called a *lazy generator*.",
+        instructions: "Write a loop from `0` to `3` using `range(4)` and print the number variable `i`.",
+        initialCode: "# Write a loop using for i in range(4):\n# and print the value inside a print statement\n",
+        solutionCode: "for i in range(4):\n    print(i)",
+        checkType: "exact",
+        expectedOutput: "0\n1\n2\n3",
+        hint: "Start with: for i in range(4): followed by an indented line print(i)",
+        difficulty: "Easy",
+        xpReward: 40,
+      },
+      {
+        id: "range_advanced",
+        moduleId: "for_loops_lab",
+        title: "Custom Steps in range()",
+        shortSummary: "Control custom loop steps and start boundaries.",
+        conceptText: "You can pass up to 3 arguments to `range(start, stop, step)`:\n- `start`: the first number (defaults to 0)\n- `stop`: where to stop (non-inclusive)\n- `step`: how much to skip by each turn\n\nExample: `range(2, 7, 2)` produces `[2, 4, 6]`. \n\n### Behind the Scenes:\nPython adds the `step` value to the current loop counter, then checks if it is still less than `stop`. If true, it runs again; otherwise, it stops instantly.",
+        instructions: "Create a range loop starting at `5`, ending before `12`, counting up by steps of `3` and print each item.",
+        initialCode: "# Write a for loop with range(5, 12, 3):\n",
+        solutionCode: "for x in range(5, 12, 3):\n    print(x)",
+        checkType: "exact",
+        expectedOutput: "5\n8\n11",
+        hint: "Start with: for x in range(5, 12, 3): followed by: print(x)",
+        difficulty: "Medium",
+        xpReward: 45,
+      }
+    ],
+  },
+  {
+    id: "while_loops_lab",
+    title: "2. While Loops Lab",
+    description: "Repetition based on conditional bounds. Meet timers and guards.",
+    iconName: "GitFork",
+    lessons: [
+      {
+        id: "while_basics",
+        moduleId: "while_loops_lab",
+        title: "The Keep-Going While Loop",
+        shortSummary: "Repeat action until a criteria turns False.",
+        conceptText: "A `while` loop checks a boolean check *before* executing its block. As long as the condition remains `True`, the loop runs again!\n\n```python\ncount = 3\nwhile count > 0:\n    print(\"Hello!\")\n    count = count - 1\n```\n\n### What is Happening Behind the Scenes?\n1. **The Checkpoint**: Python evaluates the expression (e.g., `count > 0`).\n2. **The Fork**: If `True`, python runs the indented lines below.\n3. **CRITICAL STEP**: The state variable (like count) MUST be updated (decremented or incremented) inside the loop, or the block runs forever in a memory freeze (an **Infinite Loop**!).\n4. If `False`, it skips to the next non-indented line.",
+        instructions: "We started a counter at 0. Add the missing line to increase `count` inside the loop by `1` so it prints 'Hi' three times and exits gracefully.",
+        initialCode: "count = 0\nwhile count < 3:\n    print(\"Hi\")\n    # Update your 'count' variable by adding 1 here:\n    ",
+        solutionCode: "count = 0\nwhile count < 3:\n    print(\"Hi\")\n    count = count + 1",
+        checkType: "exact",
+        expectedOutput: "Hi\nHi\nHi",
+        hint: "Make sure you include: count = count + 1 (or count += 1) properly indented!",
+        difficulty: "Easy",
+        xpReward: 50,
+      },
+      {
+        id: "loop_accumulators",
+        moduleId: "while_loops_lab",
+        title: "Loop Accumulators",
+        shortSummary: "Sum values to compute scores and tallies.",
+        conceptText: "Loop variables aren't just for counting. You can gather items inside a variable defined *outside* the loop! This pattern is called the **Accumulator Pattern**.\n\n```python\ntotal = 0 # Define outside\nfor num in [1, 2, 3]:\n    total += num # Accumulate inside\nprint(total)\n```\n\n### Behind the Scenes:\nPython maintains a single spot in memory for `total`. Each turn of the loop fetches `total`, adds the new `num` to it, and overwrites the memory slot with the updated sum.",
+        instructions: "Calculate the sum of all numbers from range(1, 4) using the accumulator format.",
+        initialCode: "total = 0\nfor score in range(1, 4):\n    # Accumulate score to total:\n    total += score\n\nprint(total)",
+        solutionCode: "total = 0\nfor score in range(1, 4):\n    total += score\nprint(total)",
+        checkType: "exact",
+        expectedOutput: "6",
+        hint: "Ensure total += score is added. By adding 1 + 2 + 3, the output console should print exactly 6.",
+        difficulty: "Medium",
+        xpReward: 50,
+      }
+    ],
+  },
+  {
+    id: "sandbox_lab",
+    title: "3. Interactive Sandbox",
+    description: "Write your custom scripts and explore compiler results.",
+    iconName: "Code",
+    lessons: [
+      {
+        id: "sandbox_hello",
+        moduleId: "sandbox_lab",
+        title: "Python Playground Rules",
+        shortSummary: "Discover the guidelines for sandbox and error messages.",
+        conceptText: "Congratulations! You have completed the loop core series. Now you are in the custom exploration playground.\n\n### Let's Review Behind-The-Scenes Tips:\n- **Watch Indentation Syntax**: Spaces at the beginning of lines tell Python which statements belong to a loop or condition block. Always use 4 spaces!\n- **Loop Counters**: Standard loops usually start sequence counts from `0` in Python instead of `1`.\n- **Error Helper**: If your compiler prints a `NameError` or `IndexError`, read the specific feedback row to trace down variable names instantly.",
+        instructions: "Initialize a list named `ratings` with numbers 8, 9, 10. Then write a loop to print them.",
+        initialCode: "ratings = [8, 9, 10]\nfor r in ratings:\n    print(r)",
+        solutionCode: "ratings = [8, 9, 10]\nfor r in ratings:\n    print(r)",
+        checkType: "exact",
+        expectedOutput: "8\n9\n10",
+        hint: "Run the starter code directly to test your compiler output!",
+        difficulty: "Easy",
+        xpReward: 20,
+      }
+    ]
+  }
+];
+
+export const BADGES: Badge[] = [
+  {
+    id: "first_steps",
+    title: "Python Pioneer",
+    description: "Successfully typed and ran your first correct Python loop or print code snippet.",
+    iconName: "Compass",
+    xpRequired: 25,
+    color: "from-blue-500 to-indigo-600",
+  },
+  {
+    id: "control_wizard",
+    title: "Loop Wizard",
+    description: "Earn 115 total XP and master Python counting, step iterations, and conditional checks.",
+    iconName: "Zap",
+    xpRequired: 115,
+    color: "from-amber-500 to-orange-600",
+  },
+  {
+    id: "codex_scholar",
+    title: "Behind-The-Scenes Master",
+    description: "Unlock all loop lessons and earn 180 total XP.",
+    iconName: "BookOpen",
+    xpRequired: 180,
+    color: "from-emerald-500 to-teal-600",
+  },
+  {
+    id: "ai_collaborator",
+    title: "AI Power-User",
+    description: "Discussed loop execution, debug errors, or analogies with PyGuide AI Coach.",
+    iconName: "Sparkles",
+    xpRequired: 50,
+    color: "from-fuchsia-500 to-pink-600",
+  }
+];
